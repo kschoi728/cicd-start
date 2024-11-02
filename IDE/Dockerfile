@@ -47,10 +47,9 @@ RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/s
 RUN apt update && apt-get install -y terraform
 
 # Kubectl
-RUN curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg  \
-    && echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] hls ttps://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
+RUN curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.4/2024-09-11/bin/linux/amd64/kubectl && chmod +x ./kubectl && mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 
-RUN apt-get update && apt-get install -y kubectl
+#RUN apt-get update && apt-get install -y kubectl
 
 # Kubectx & Kubens
 RUN git clone https://github.com/ahmetb/kubectx /opt/kubectx  \

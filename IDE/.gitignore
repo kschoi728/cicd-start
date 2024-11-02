@@ -1,4 +1,5 @@
+password.txt
 src
 vscode
 jenkins
-.DS_Store
+.env
